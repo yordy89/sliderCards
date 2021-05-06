@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { Box, Heading, Button } from 'grommet'
 import { Previous, Next } from 'grommet-icons'
 import Cards from '../Card'
+import { isMobile } from 'react-device-detect'
 
 const Slider = ({ stepWidth = 100, title, previous, next, cards, ...rest }) => {
   const scrollRef = useRef()
@@ -37,7 +38,7 @@ const Slider = ({ stepWidth = 100, title, previous, next, cards, ...rest }) => {
       background='neutral900'
       pad={{ horizontal: 'small', vertical: 'small' }}
       elevation='medium'
-      height='medium'
+      height={isMobile ? '100%' : 'medium'}
       width='xlarge'
       {...rest}
     >
@@ -46,23 +47,23 @@ const Slider = ({ stepWidth = 100, title, previous, next, cards, ...rest }) => {
         justify='between'
         width='100%'
       >
-        <Heading level={4} margin='none'>{title}</Heading>
+        <Heading level={isMobile ? 1 : 4} margin={!isMobile && 'none'}>{title}</Heading>
         {showButtons && (
           <Box
             direction='row'
             justify='between'
-            gap='small'
+            gap={isMobile ? 'large' : 'small'}
           >
             <Button
               onClick={() => goTo(scrollTo.previousScroll)}
-              icon={previous || <Previous size='small' />}
+              icon={previous || <Previous size={isMobile ? 'large' : 'small'} />}
               style={{ borderRadius: '50%' }}
               hoverIndicator={{ background: 'neutral700' }}
               disabled={previousButton}
             />
             <Button
               onClick={() => goTo(scrollTo.nextScroll)}
-              icon={next || <Next size='small' />}
+              icon={next || <Next size={isMobile ? 'large' : 'small'} />}
               style={{ borderRadius: '50%' }}
               hoverIndicator={{ background: 'neutral700' }}
               disabled={nextButton}
@@ -72,7 +73,7 @@ const Slider = ({ stepWidth = 100, title, previous, next, cards, ...rest }) => {
       </Box>
       <Box
         direction='row'
-        gap='medium'
+        gap={isMobile ? 'large' : 'medium'}
         align='center'
         justify={showButtons ? 'start' : 'between'}
         height='100%'
