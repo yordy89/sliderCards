@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Grommet, Box } from 'grommet'
+import { theme } from './theme'
+import Slider from './Components/Slider'
+import Cards from './cards.json'
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grommet theme={theme}>
+      <Box 
+         direction='column'
+         justify='center'
+         height='100vh'
+         pad={{horizontal:'small'}}
+      >
+      <Slider title='Recently viewed' cards={Cards} stepWidth={600}/>
+      </Box>
+    </Grommet>
   );
 }
 
